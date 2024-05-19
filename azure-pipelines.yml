@@ -2,16 +2,16 @@ trigger:
 - '*'
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: Azure Pipelines
+
+variables:
+  buildConfiguration: 'Release'
 
 steps:
 - task: UseDotNet@2
   displayName: 'Use .NET SDK 6.x'
   inputs:
-<<<<<<< HEAD
     packageType: sdk
-=======
->>>>>>> fff7c79b54904f30a87e8fec655cade76af870d0
     version: '6.x'
 
 - task: Npm@1
@@ -40,21 +40,4 @@ steps:
   inputs:
     command: 'build'
     arguments: '--no-restore --configuration Release'
-<<<<<<< HEAD
     projects: '**/*.csproj'
-=======
-    projects: '**/*.csproj'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Publish the project - Release'
-  inputs:
-    command: 'publish'
-    projects: '**/*.csproj'
-    publishWebProjects: false
-    arguments: '--no-build --configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
-    zipAfterPublish: true
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  condition: succeeded()
->>>>>>> fff7c79b54904f30a87e8fec655cade76af870d0
